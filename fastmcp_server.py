@@ -17,8 +17,8 @@ load_dotenv()
 from src.competitive_intelligence.data_sources import get_competitor_news, monitor_competitor_websites, get_tech_news
 from src.competitive_intelligence.analysis import analyze_market_trends, summarize_competitor_activity
 from src.competitive_intelligence.report_generation import generate_intelligence_report
-from src.daily_planning.calendar_integration import get_calendar_events, get_upcoming_tasks
-from src.daily_planning.task_prioritization import prioritize_tasks, assess_impact
+from src.daily_planning.calendar_integration import get_calendar_events
+from src.daily_planning.task_prioritization import prioritize_tasks, assess_impact, get_upcoming_tasks
 from src.daily_planning.plan_generation import create_daily_plan
 
 # Initialize FastMCP server
