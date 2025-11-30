@@ -11,7 +11,6 @@ import os
 import json
 from datetime import datetime, timedelta
 from typing import List, Dict, Any, Optional
-import openai
 
 
 def analyze_market_trends(
@@ -231,7 +230,7 @@ def summarize_article_content(content: str, max_length: int = 150) -> str:
     if len(content) <= max_length:
         return content
     
-    # Simple truncation for now - would use OpenAI in production
+    # Simple truncation for now - would use AI summarization in production
     return content[:max_length] + "..." if len(content) > max_length else content
 
 

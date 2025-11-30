@@ -11,7 +11,6 @@ import os
 import json
 from datetime import datetime, timedelta, time
 from typing import List, Dict, Any, Optional, Tuple
-import openai
 
 
 def create_daily_plan(

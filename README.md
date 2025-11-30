@@ -50,7 +50,6 @@ Edit the `.env` file with your settings:
 ```bash
 # API Keys
 NEWS_API_KEY=your_news_api_key_here
-OPENAI_API_KEY=your_openai_api_key_here
 
 # Google Calendar OAuth
 GOOGLE_CLIENT_ID=your_google_client_id_here
@@ -179,11 +178,6 @@ mypy src/
 1. Sign up at [NewsAPI.org](https://newsapi.org/)
 2. Get your API key
 3. Add to `.env` file as `NEWS_API_KEY`
-
-### OpenAI API
-1. Sign up at [OpenAI](https://platform.openai.com/)
-2. Get your API key
-3. Add to `.env` file as `OPENAI_API_KEY`
 
 ### Google Calendar API
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
