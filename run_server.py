@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Simple script to run the Competitive Intelligence & Daily Planning MCP server.
+Simple script to run Competitive Intelligence & Daily Planning MCP server.
 """
 
 import os
@@ -14,9 +14,9 @@ sys.path.insert(0, str(src_path))
 from server import mcp
 
 def main():
-    """Run the FastMCP server."""
+    """Run FastMCP server."""
     # Check for required environment variables
-    required_vars = ["OPENAI_API_KEY"]
+    required_vars = ["GEMINI_API_KEY"]
     missing_vars = [var for var in required_vars if not os.getenv(var)]
     
     if missing_vars:
@@ -26,7 +26,7 @@ def main():
         print("\nPlease set these in your .env file or environment.")
         return 1
     
-    # Run the FastMCP server
+    # Run FastMCP server
     print("Starting Competitive Intelligence & Daily Planning MCP server...")
     mcp.run()
     

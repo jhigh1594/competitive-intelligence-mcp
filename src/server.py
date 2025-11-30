@@ -31,42 +31,6 @@ from daily_planning.task_prioritization import prioritize_tasks, assess_impact
 from daily_planning.plan_generation import create_daily_plan
 
 
-def parse_arguments():
-    """Parse command line arguments."""
-    parser = argparse.ArgumentParser(description="Competitive Intelligence & Daily Planning MCP Server")
-    
-    # Add arguments for different modes
-    parser.add_argument(
-        "--mode", 
-        choices=["server", "get-intelligence", "create-plan"],
-        default="server",
-        help="Operation mode: server (run MCP server), get-intelligence (run once), create-plan (run once)"
-    )
-    
-    # Add optional arguments
-    parser.add_argument(
-        "--transport",
-        choices=["stdio", "http"],
-        default="stdio",
-        help="Transport protocol: stdio (default), http"
-    )
-    
-    parser.add_argument(
-        "--host",
-        default="127.0.0.1",
-        help="Host for HTTP transport"
-    )
-    
-    parser.add_argument(
-        "--port",
-        type=int,
-        default=8000,
-        help="Port for HTTP transport"
-    )
-    
-    return parser.parse_args()
-
-
 @mcp.tool
 def get_competitive_intelligence(
     competitors: List[str],
@@ -185,7 +149,7 @@ def schedule_morning_intelligence(
     Schedule automated morning intelligence gathering and daily planning.
     
     Args:
-        time: Time to run the automation (HH:MM format)
+        time: Time to run automation (HH:MM format)
         competitors: List of competitors to monitor
         calendar_source: Calendar service for daily planning
     
@@ -203,6 +167,42 @@ def schedule_morning_intelligence(
         "status": "scheduled",
         "message": f"Competitive intelligence and daily planning scheduled for {time}"
     }
+
+
+def parse_arguments():
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(description="Competitive Intelligence & Daily Planning MCP Server")
+    
+    # Add arguments for different modes
+    parser.add_argument(
+        "--mode", 
+        choices=["server", "get-intelligence", "create-plan"],
+        default="server",
+        help="Operation mode: server (run MCP server), get-intelligence (run once), create-plan (run once)"
+    )
+    
+    # Add optional arguments
+    parser.add_argument(
+        "--transport",
+        choices=["stdio", "http"],
+        default="stdio",
+        help="Transport protocol: stdio (default), http"
+    )
+    
+    parser.add_argument(
+        "--host",
+        default="127.0.0.1",
+        help="Host for HTTP transport"
+    )
+    
+    parser.add_argument(
+        "--port",
+        type=int,
+        default=8000,
+        help="Port for HTTP transport"
+    )
+    
+    return parser.parse_args()
 
 
 def run_intelligence_mode():

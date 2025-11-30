@@ -7,7 +7,7 @@
 - FastMCP installed (`pip install fastmcp`)
 - Required API keys in `.env` file
 
-### Running the Server
+### Running Server
 
 #### Option 1: Direct Execution
 ```bash
@@ -19,7 +19,7 @@ python src/server.py
 python src/server.py --transport http --host 0.0.0.0 --port 8000
 ```
 
-### Testing the Tools
+### Testing Tools
 
 #### Test Competitive Intelligence
 ```bash
@@ -46,19 +46,39 @@ python example_usage.py planning
 
 ### FastMCP Cloud (Recommended)
 
-1. Configure FastMCP Cloud credentials
-```bash
-export FASTMCP_CLOUD_TOKEN=your_token_here
+FastMCP Cloud is a managed platform for hosting MCP servers. It's the fastest way to deploy your server and make it available to LLM clients like Claude and Cursor.
+
+#### Prerequisites
+- A GitHub account
+- A GitHub repository containing your FastMCP server
+- Required environment variables configured in your repository
+
+#### Step 1: Prepare Your Repository
+1. Ensure your repository has a `pyproject.toml` or `requirements.txt` file with dependencies
+2. Create a `.env.example` file documenting required environment variables
+3. Make sure your server file exports a FastMCP instance (see `fastmcp_server.py`)
+
+#### Step 2: Deploy to FastMCP Cloud
+1. Visit [fastmcp.cloud](https://fastmcp.cloud) and sign in with your GitHub account
+2. Create a new project and select your repository
+3. Configure your project:
+   - **Name**: Competitive Intelligence & Daily Planning
+   - **Entrypoint**: `fastmcp_server.py:mcp` (points to the mcp instance in fastmcp_server.py)
+   - **Authentication**: Enable if you want to restrict access to your organization members
+
+#### Step 3: Configure Environment Variables
+In the FastMCP Cloud dashboard, add the following environment variables:
+- `GEMINI_API_KEY`: Your Google Gemini API key (required)
+- `NEWS_API_KEY`: Your News API key (required)
+- Optional: Google Calendar, Jira, and Asana credentials if using those integrations
+
+#### Step 4: Connect to Your Server
+Once deployed, your server will be available at a URL like:
+```
+https://your-project-name.fastmcp.app/mcp
 ```
 
-2. Deploy to FastMCP Cloud
-```bash
-fastmcp deploy src/server.py
-```
-
-3. Access via FastMCP Cloud
-- Your MCP server will be available at a secure URL
-- Access through FastMCP Cloud dashboard
+You can connect to it using the FastMCP Cloud dashboard connection options or by adding it to your Cursor MCP configuration.
 
 ### Self-Hosted Deployment
 
@@ -89,6 +109,21 @@ docker run -p 8000:8000 competitive-intelligence-mcp
 
 ## Cursor Integration
 
+### For FastMCP Cloud Deployment
+Add to your Cursor MCP configuration:
+
+```json
+{
+  "mcpServers": {
+    "competitive-intelligence": {
+      "command": "npx",
+      "args": ["-y", "@fastmcp/cli", "connect", "https://your-project-name.fastmcp.app/mcp"]
+    }
+  }
+}
+```
+
+### For Local Development
 Add to your Cursor MCP configuration:
 
 ```json
@@ -105,9 +140,8 @@ Add to your Cursor MCP configuration:
 ## Environment Variables
 
 ### Required
-- `OPENAI_API_KEY`: OpenAI API key for AI analysis
-- `NEWS_API_KEY`: News API key for competitive intelligence
 - `GEMINI_API_KEY`: Google Gemini API key for AI analysis
+- `NEWS_API_KEY`: News API key for competitive intelligence
 
 ### Optional
 - `GOOGLE_CLIENT_ID` & `GOOGLE_CLIENT_SECRET`: Google Calendar OAuth credentials
